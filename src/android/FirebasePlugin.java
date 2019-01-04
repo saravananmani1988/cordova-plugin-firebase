@@ -742,6 +742,7 @@ public class FirebasePlugin extends CordovaPlugin {
                             //     detect the incoming verification SMS and perform verificaiton without
                             //     user action.
                             Log.d(TAG, "success: verifyPhoneNumber.onVerificationCompleted");
+                            Log.d(TAG, "success sarmani: verifyPhoneNumber.onVerificationCompleted" + credential );
 
                             JSONObject returnResults = new JSONObject();
                             try {
@@ -753,11 +754,12 @@ public class FirebasePlugin extends CordovaPlugin {
                                     Class type = field.getType();
                                     if(type == String.class){
                                         String value = getPrivateField(credential, field);
-                                        if(value != null) continue;
+                                        if(value == null) continue;
                                         if(value.length() > 100) verificationId = value;
                                         else if(value.length() >= 4 && value.length() <= 6) code = value;
                                     }
                                 }
+                                returnResults.put("credential", credential)
                                 returnResults.put("verified", verificationId != null && code != null);
                                 returnResults.put("verificationId", verificationId);
                                 returnResults.put("code", code);
