@@ -753,7 +753,7 @@ public class FirebasePlugin extends CordovaPlugin {
                                     Class type = field.getType();
                                     if(type == String.class){
                                         String value = getPrivateField(credential, field);
-                                        if(value == null) continue;
+                                        if(value != null) continue;
                                         if(value.length() > 100) verificationId = value;
                                         else if(value.length() >= 4 && value.length() <= 6) code = value;
                                     }
